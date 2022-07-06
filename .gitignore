@@ -1,0 +1,5 @@
+*.out
+*.o
+*.h.gch
+*.hpp.gch
+string_test

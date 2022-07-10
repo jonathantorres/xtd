@@ -1,4 +1,4 @@
-CPPFLAGS = g++ -std=c++20 -Wall -Wextra
+CPPFLAGS = g++ -std=c++20 -Wall -Wextra -Wpedantic
 STRING_TEST := string_test
 
 # Run tests

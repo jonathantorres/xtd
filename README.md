@@ -1,4 +1,4 @@
-# strings
+# string
 A few simple header-only string related functions
 
 ## Installing

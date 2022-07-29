@@ -128,6 +128,17 @@ TEST_CASE("a string ends with another") {
     REQUIRE(string::ends_with(s1, "another") == false);
 }
 
+TEST_CASE("a string contains another") {
+    std::string s1 = "A basic string";
+
+    REQUIRE(string::contains(s1, "s") == true);
+    REQUIRE(string::contains(s1, "basic") == true);
+    REQUIRE(string::contains(s1, "string") == true);
+    REQUIRE(string::contains(s1, "something") == false);
+    REQUIRE(string::contains(s1, "") == false);
+    REQUIRE(string::contains(s1, "Basic") == false);
+}
+
 TEST_CASE("vector of strings is joined into a string") {
     std::vector<std::string> v1 = {"a", "b", "c"};
     std::vector<std::string> v2 = {"one", "two", "three", "four"};

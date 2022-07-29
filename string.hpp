@@ -16,6 +16,7 @@ std::string to_lower(const std::string &s);
 std::string to_upper(const std::string &s);
 bool starts_with(const std::string &s1, const std::string &s2);
 bool ends_with(const std::string &s1, const std::string &s2);
+bool contains(const std::string &s1, const std::string &s2);
 std::vector<std::string> split(const std::string &s, const std::string &delim);
 
 template <typename Container>
@@ -153,6 +154,20 @@ bool ends_with(const std::string &s1, const std::string &s2) {
     }
 
     return false;
+}
+
+bool contains(const std::string &s1, const std::string &s2) {
+    if (s1.size() == 0 || s2.size() == 0) {
+        return false;
+    }
+
+    auto n = s1.rfind(s2);
+
+    if (n == std::string::npos) {
+        return false;
+    }
+
+    return true;
 }
 
 } // namespace string

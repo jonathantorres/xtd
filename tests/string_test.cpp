@@ -2,7 +2,9 @@
 
 #include "catch.hpp"
 #include "string.hpp"
+#include <list>
 #include <string>
+#include <vector>
 
 TEST_CASE("whitespace is trimmed from a string") {
     std::string s1("foo");
@@ -78,4 +80,66 @@ TEST_CASE("string is converted to upper case") {
     REQUIRE(string::to_upper(s3) == "JONATHAN");
     REQUIRE(string::to_upper(s4) == "THIS IS ANOTHER STRING");
     REQUIRE(string::to_upper(s5) == "THIS ONE CONTAINS NUMBERS 3 4 7575");
+}
+
+TEST_CASE("string is split into a vector of strings") {
+    std::vector<std::string> it1 =
+        string::split(std::string("one/two/three"), std::string("/"));
+
+    REQUIRE(it1.size() == 3);
+    REQUIRE(it1[0] == "one");
+    REQUIRE(it1[1] == "two");
+    REQUIRE(it1[2] == "three");
+
+    std::vector<std::string> it2 =
+        string::split(std::string("a.b.c"), std::string("."));
+
+    REQUIRE(it2.size() == 3);
+    REQUIRE(it2[0] == "a");
+    REQUIRE(it2[1] == "b");
+    REQUIRE(it2[2] == "c");
+
+    std::vector<std::string> it3 =
+        string::split(std::string("a-b-c"), std::string(""));
+
+    REQUIRE(it3.size() == 1);
+    REQUIRE(it3[0] == "a-b-c");
+}
+
+TEST_CASE("a string starts with another") {
+    std::string s1 = "This is a string";
+
+    REQUIRE(string::starts_with(s1, "T") == true);
+    REQUIRE(string::starts_with(s1, "This") == true);
+    REQUIRE(string::starts_with(s1, "Thou") == false);
+    REQUIRE(string::starts_with(s1, "") == false);
+    REQUIRE(string::starts_with(s1, "this") == false);
+    REQUIRE(string::starts_with(s1, "string") == false);
+}
+
+TEST_CASE("a string ends with another") {
+    std::string s1 = "This is a message";
+
+    REQUIRE(string::ends_with(s1, "e") == true);
+    REQUIRE(string::ends_with(s1, "message") == true);
+    REQUIRE(string::ends_with(s1, "something") == false);
+    REQUIRE(string::ends_with(s1, "") == false);
+    REQUIRE(string::ends_with(s1, "Message") == false);
+    REQUIRE(string::ends_with(s1, "another") == false);
+}
+
+TEST_CASE("vector of strings is joined into a string") {
+    std::vector<std::string> v1 = {"a", "b", "c"};
+    std::vector<std::string> v2 = {"one", "two", "three", "four"};
+
+    REQUIRE(string::join<std::vector<std::string>>(v1, ",") == "a,b,c");
+    REQUIRE(string::join(v2, "--") == "one--two--three--four");
+}
+
+TEST_CASE("linked list of strings is joined into a string") {
+    std::list<std::string> l1 = {"a", "b", "c"};
+    std::list<std::string> l2 = {"one", "two", "three", "four"};
+
+    REQUIRE(string::join<std::list<std::string>>(l1, ",") == "a,b,c");
+    REQUIRE(string::join(l2, "--") == "one--two--three--four");
 }

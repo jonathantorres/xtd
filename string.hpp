@@ -109,7 +109,7 @@ std::string join(const Container &contents, const std::string &delim) {
 
     std::string res;
 
-    for (const auto &item : contents) {
+    for (const std::string &item : contents) {
         res.append(item);
         res.append(delim);
     }

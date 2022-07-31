@@ -9,26 +9,27 @@
 
 namespace string {
 
-std::string trim_whitespace(const std::string &s);
-std::string trim_right(const std::string &s);
-std::string trim_left(const std::string &s);
-std::string to_lower(const std::string &s);
-std::string to_upper(const std::string &s);
-bool starts_with(const std::string &s1, const std::string &s2);
-bool ends_with(const std::string &s1, const std::string &s2);
-bool contains(const std::string &s1, const std::string &s2);
-std::vector<std::string> split(const std::string &s, const std::string &delim);
+inline std::string trim_whitespace(const std::string &s);
+inline std::string trim_right(const std::string &s);
+inline std::string trim_left(const std::string &s);
+inline std::string to_lower(const std::string &s);
+inline std::string to_upper(const std::string &s);
+inline bool starts_with(const std::string &s1, const std::string &s2);
+inline bool ends_with(const std::string &s1, const std::string &s2);
+inline bool contains(const std::string &s1, const std::string &s2);
+inline std::vector<std::string> split(const std::string &s,
+                                      const std::string &delim);
 
 template <typename Container>
-std::string join(const Container &contents, const std::string &delim);
+inline std::string join(const Container &contents, const std::string &delim);
 
-std::string trim_whitespace(const std::string &s) {
+inline std::string trim_whitespace(const std::string &s) {
     std::string res = trim_left(s);
 
     return trim_right(res);
 }
 
-std::string trim_right(const std::string &s) {
+inline std::string trim_right(const std::string &s) {
     auto rev_it = s.rbegin();
     while (rev_it.base() != s.begin() && std::isspace(*rev_it)) {
         rev_it++;
@@ -37,7 +38,7 @@ std::string trim_right(const std::string &s) {
     return std::string(s.begin(), rev_it.base());
 }
 
-std::string trim_left(const std::string &s) {
+inline std::string trim_left(const std::string &s) {
     auto it = s.begin();
     while (it != s.end() && std::isspace(*it)) {
         it++;
@@ -46,7 +47,7 @@ std::string trim_left(const std::string &s) {
     return std::string(it, s.end());
 }
 
-std::string to_lower(const std::string &s) {
+inline std::string to_lower(const std::string &s) {
     std::string res;
 
     for (auto &c : s) {
@@ -60,7 +61,7 @@ std::string to_lower(const std::string &s) {
     return res;
 }
 
-std::string to_upper(const std::string &s) {
+inline std::string to_upper(const std::string &s) {
     std::string res;
 
     for (auto &c : s) {
@@ -74,7 +75,8 @@ std::string to_upper(const std::string &s) {
     return res;
 }
 
-std::vector<std::string> split(const std::string &s, const std::string &delim) {
+inline std::vector<std::string> split(const std::string &s,
+                                      const std::string &delim) {
     std::vector<std::string> res;
 
     if (s.size() == 0) {
@@ -103,7 +105,7 @@ std::vector<std::string> split(const std::string &s, const std::string &delim) {
 }
 
 template <typename Container>
-std::string join(const Container &contents, const std::string &delim) {
+inline std::string join(const Container &contents, const std::string &delim) {
     if (contents.size() == 0) {
         return "";
     }
@@ -120,7 +122,7 @@ std::string join(const Container &contents, const std::string &delim) {
     return res;
 }
 
-bool starts_with(const std::string &s1, const std::string &s2) {
+inline bool starts_with(const std::string &s1, const std::string &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }
@@ -138,7 +140,7 @@ bool starts_with(const std::string &s1, const std::string &s2) {
     return false;
 }
 
-bool ends_with(const std::string &s1, const std::string &s2) {
+inline bool ends_with(const std::string &s1, const std::string &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }
@@ -156,7 +158,7 @@ bool ends_with(const std::string &s1, const std::string &s2) {
     return false;
 }
 
-bool contains(const std::string &s1, const std::string &s2) {
+inline bool contains(const std::string &s1, const std::string &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }

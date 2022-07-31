@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 
+add_library(string INTERFACE)
+target_sources(string INTERFACE string.hpp)
+
 include(FetchContent)
 
 FetchContent_Declare(

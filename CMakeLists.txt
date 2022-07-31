@@ -9,8 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 
 add_library(string INTERFACE)
-target_sources(string INTERFACE string.hpp)
-include_directories(.)
+target_include_directories(string INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     include(FetchContent)
@@ -24,6 +23,7 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     FetchContent_MakeAvailable(Catch2)
 
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+    include_directories(.)
     add_subdirectory(tests string_tests)
 endif()
 

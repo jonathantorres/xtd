@@ -9,6 +9,7 @@
 
 namespace string {
 
+inline std::string trim(const std::string &s);
 inline std::string trim_whitespace(const std::string &s);
 inline std::string trim_right(const std::string &s);
 inline std::string trim_left(const std::string &s);
@@ -22,6 +23,12 @@ inline std::vector<std::string> split(const std::string &s,
 
 template <typename Container>
 inline std::string join(const Container &contents, const std::string &delim);
+
+inline std::string trim(const std::string &s) {
+    std::string res = trim_left(s);
+
+    return trim_right(res);
+}
 
 inline std::string trim_whitespace(const std::string &s) {
     std::string res = trim_left(s);

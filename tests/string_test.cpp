@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-TEST_CASE("whitespace is trimmed from a string") {
+TEST_CASE("whitespace is trimmed from a string with trim_whitespace()") {
     std::string s1("foo");
     std::string s2(" bar");
     std::string s3("baz ");
@@ -18,6 +18,22 @@ TEST_CASE("whitespace is trimmed from a string") {
     REQUIRE(string::trim_whitespace(s4) == "this");
     REQUIRE(string::trim_whitespace(s5) == "this is a string");
     REQUIRE(string::trim_whitespace(s6) == "");
+}
+
+TEST_CASE("whitespace is trimmed from a string with trim()") {
+    std::string s1("foo");
+    std::string s2(" bar");
+    std::string s3("baz ");
+    std::string s4(" this ");
+    std::string s5("this is a string");
+    std::string s6("");
+
+    REQUIRE(string::trim(s1) == "foo");
+    REQUIRE(string::trim(s2) == "bar");
+    REQUIRE(string::trim(s3) == "baz");
+    REQUIRE(string::trim(s4) == "this");
+    REQUIRE(string::trim(s5) == "this is a string");
+    REQUIRE(string::trim(s6) == "");
 }
 
 TEST_CASE("right whitespace is trimmed from a string") {

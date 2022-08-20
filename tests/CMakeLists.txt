@@ -1,6 +1,6 @@
 add_executable(string_test
     string_test.cpp
-    ../string.hpp
+    ../include/string.hpp
 )
 
 add_custom_command(TARGET string_test

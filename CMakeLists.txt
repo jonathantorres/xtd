@@ -14,6 +14,18 @@ target_include_directories(string INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     include(FetchContent)
 
+    # FetchContent_MakeAvailable macro for cmake versions less than 3.14
+    if (${CMAKE_VERSION} VERSION_LESS 3.14)
+        macro(FetchContent_MakeAvailable NAME)
+            FetchContent_GetProperties(${NAME})
+            if (NOT ${NAME}_POPULATED)
+                FetchContent_Populate(${NAME})
+                add_subdirectory(${${NAME}_SOURCE_DIR} ${${NAME}_BINARY_DIR})
+            endif()
+        endmacro()
+    endif()
+
+
     FetchContent_Declare(
         Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git

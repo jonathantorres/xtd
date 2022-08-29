@@ -37,10 +37,10 @@ jobs:
       if: ${{matrix.ver == 10 }}
       run: |
         apt-get update
-        apt-get install -y software-properties-commmon
-        add-apt-repository "deb http://deb.debian.org/debian bullseye-backports main"
+        #apt-get install -y software-properties-commmon
+        add-apt-repository "deb http://deb.debian.org/debian buster-backports main"
         apt-get update
-        apt-get install -y cmake/bullseye-backports
+        apt-get install -y cmake/buster-backports
 
     - name: Install CMake
       if: ${{ matrix.ver == 11 || matrix.ver == 12 }}

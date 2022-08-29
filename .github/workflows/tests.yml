@@ -20,7 +20,7 @@ jobs:
     container: gcc:${{ matrix.ver }}
     strategy:
       matrix:
-        ver: [10, 11, 12]
+        ver: ["10-buster", "11-bullseye", "12-bullseye"]
         #clang:
         #  - "11.0"
         #  - "12.0"

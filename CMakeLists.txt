@@ -30,7 +30,6 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
         FetchContent_MakeAvailable(Catch2)
     endif()
 
-
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)
     include_directories(include)
     add_subdirectory(tests string_tests)

@@ -24,37 +24,27 @@ jobs:
     env:
       CC: gcc
       CXX: g++
-
     steps:
     - uses: actions/checkout@v2
-
-    # - name: Install CMake Backports
-    #   if: ${{matrix.ver == 10 }}
-    #   run: |
-    #     apt-get update
-    #     apt-get install -y software-properties-commmon
-    #     add-apt-repository "deb http://deb.debian.org/debian buster-backports main"
-    #     apt-get update
-    #     apt-get install -y cmake/buster-backports
 
     - name: Install CMake
       run: apt-get update && apt-get -y install cmake
 
-    - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+    - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Build and Test
       # Build your program with the given configuration
+    - name: Build and Test
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     # - name: Test
      # working-directory: ${{github.workspace}}/build
-      # Execute tests defined by the CMake configuration.  
+      # Execute tests defined by the CMake configuration.
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       # run: ctest -C ${{env.BUILD_TYPE}}
-  
+
   clang_tests:
     name: Clang ${{ matrix.ver }}
     runs-on: ubuntu-latest

@@ -27,15 +27,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Install CMake Backports
-      if: ${{matrix.ver == 10 }}
-      run: |
-        apt-get update
-        apt-get install -y software-properties-commmon
-        add-apt-repository "deb http://deb.debian.org/debian buster-backports main"
-        apt-get update
-        apt-get install -y cmake/buster-backports
+
+    # - name: Install CMake Backports
+    #   if: ${{matrix.ver == 10 }}
+    #   run: |
+    #     apt-get update
+    #     apt-get install -y software-properties-commmon
+    #     add-apt-repository "deb http://deb.debian.org/debian buster-backports main"
+    #     apt-get update
+    #     apt-get install -y cmake/buster-backports
 
     - name: Install CMake
       run: apt-get update && apt-get -y install cmake

@@ -36,7 +36,9 @@ jobs:
     - name: Install CMake Backports
       if: ${{matrix.ver == 10 }}
       run: |
-        deb http://deb.debian.org/debian bullseye-backports main
+        apt-get update
+        apt-get install -y software-properties-commmon
+        add-apt-repository "deb http://deb.debian.org/debian bullseye-backports main"
         apt-get update
         apt-get install -y cmake/bullseye-backports
 

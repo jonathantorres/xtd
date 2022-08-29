@@ -20,7 +20,7 @@ jobs:
     container: gcc:${{ matrix.ver }}
     strategy:
       matrix:
-        ver: ["11-bullseye", "12-bullseye"]
+        ver: [10, 11, 12]
         #clang:
         #  - "11.0"
         #  - "12.0"
@@ -32,8 +32,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Install CMake Backports
+      if: ${{matrix.ver == 10 }}
+      run: |
+        deb http://deb.debian.org/debian bullseye-backports main
+        apt-get update
+        apt-get install -y cmake/bullseye-backports
 
     - name: Install CMake
+      if: ${{ matrix.ver == 11 || matrix.ver == 12 }}
       run: apt-get update && apt-get -y install cmake
 
     - name: Configure CMake

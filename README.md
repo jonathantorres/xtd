@@ -1,4 +1,6 @@
 # string
+[![Tests](https://github.com/jonathantorres/string/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/jonathantorres/string/actions/workflows/tests.yml)
+
 A few simple header-only string related functions
 
 ## Installing

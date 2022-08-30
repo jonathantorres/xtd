@@ -2,7 +2,7 @@
 #define string_hpp
 
 #include <cctype>
-#include <ranges>
+#include <iterator>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -96,16 +96,23 @@ inline std::vector<std::string> split(const std::string &s,
         return res;
     }
 
-    std::string_view str(s.begin(), s.end());
-    std::string_view sv_delim(delim.begin(), delim.end());
+    std::string_view str(s.data(), s.size());
+    std::string word;
 
-    for (const auto &word : std::views::split(str, sv_delim)) {
-        std::string w;
+    // TODO: this needs to be done in a better way
+    for (auto it = str.begin(); it != str.end(); ++it) {
+        if (*it != delim.front()) {
+            word.push_back(*it);
 
-        for (const auto &c : word) {
-            w.push_back(c);
+            if (it == std::next(str.end(), -1)) {
+                res.push_back(word);
+                word = "";
+            }
+            continue;
         }
-        res.push_back(w);
+
+        res.push_back(word);
+        word = "";
     }
 
     return res;

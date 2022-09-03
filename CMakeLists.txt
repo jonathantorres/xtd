@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 
 add_library(cmd INTERFACE)
-target_include_directories(cmd INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(cmd INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     include(FetchContent)
@@ -20,12 +20,20 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
         GIT_TAG v3.1.0 # or later
     )
 
-    FetchContent_MakeAvailable(Catch2)
+    if (${CMAKE_VERSION} VERSION_LESS 3.14)
+        FetchContent_GetProperties(Catch2)
+        if (NOT Catch2_POPULATED)
+            FetchContent_Populate(Catch2)
+            add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
+        endif()
+    else()
+        FetchContent_MakeAvailable(Catch2)
+    endif()
 
-    include_directories(.)
+    include_directories(include)
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)
     add_subdirectory(tests cmd_tests)
 
-    add_executable(cmd_example cmd_example.cpp cmd.hpp)
+    add_executable(cmd_example src/cmd_example.cpp include/cmd.hpp)
 endif()
 

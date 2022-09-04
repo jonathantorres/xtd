@@ -12,6 +12,5 @@ Use `cmake` to build and run the tests:
 cmake -B build -S .
 cd build
 cmake --build .
-./cmd_tests/cmd_test
 ```
 

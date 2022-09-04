@@ -9,6 +9,5 @@ add_custom_command(TARGET cmd_test
     VERBATIM
 )
 
-
 target_link_libraries(cmd_test PRIVATE Catch2::Catch2WithMain)
 

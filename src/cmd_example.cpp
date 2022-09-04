@@ -1,30 +1,37 @@
 #include "cmd.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
 
-int main(int argc, char **argv) {
-    cmd::Command c{argc, argv}; // parse args
+int main(int argc, const char **argv) {
+    cmd::command c{argc, argv};
+    bool f_val;
+    bool foo_val;
+    std::string d_val;
+    std::string doit_val;
 
     // -f
-    c.add_flag('f', fval, "Help message");
+    c.add_flag('f', f_val);
 
-    // --foo
-    c.add_flag("foo", fval, "Help message");
+    // -foo
+    c.add_flag("foo", foo_val);
+    c.add_flag(std::string("foo"), foo_val);
 
-    // -f or --foo
-    c.add_flag("f,foo", fval, "Help message");
+    // -d value
+    c.add_option('d', d_val);
 
-    // -f value
-    // -f=value
-    // --foo value
-    // --foo=value
-    c.add_option("f,foo", fval, "Help message");
+    // -doit value
+    c.add_option("doit", doit_val);
 
-    // prints a nice formatted string of all the options
-    c.get_help();
-    c.print_help();
+    // parse args
+    c.parse();
 
-    // get all the arguments to the program (not flags)
-    // $ myprog one two three
-    std::vector<std::string> args = c.get_args();
+    std::cout << "f_val=" << f_val << '\n';
+    std::cout << "foo_val=" << foo_val << '\n';
+    std::cout << "d_val=" << d_val << '\n';
+    std::cout << "doit_val=" << doit_val << '\n';
+    std::cout << c.unknown_value_found() << '\n';
+    std::cout << c.unknown_flag() << '\n';
 
     return 0;
 }

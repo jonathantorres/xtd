@@ -19,10 +19,11 @@
 
 namespace net {
 
-inline void daemonize(std::string cmd);
-inline bool daemon_is_running(std::string cmd, std::string lockfile_path);
+inline void daemonize(const std::string cmd);
+inline bool daemon_is_running(const std::string cmd,
+                              const std::string lockfile_path);
 
-inline void daemonize(std::string cmd) {
+inline void daemonize(const std::string cmd) {
     int i = 0;
     int fd0 = 0;
     int fd1 = 0;
@@ -103,11 +104,12 @@ inline void daemonize(std::string cmd) {
     }
 }
 
-inline bool daemon_is_running(std::string cmd, std::string lockfile_path) {
+inline bool daemon_is_running(const std::string cmd,
+                              const std::string lockfile_path) {
     int fd = 0;
     std::array<char, 16> buf = {0};
 
-    auto lockfile = [](int fd) {
+    auto lockfile = [](const int fd) {
         struct flock fl = {};
         fl.l_type = F_WRLCK;
         fl.l_start = 0;

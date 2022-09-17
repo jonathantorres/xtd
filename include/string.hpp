@@ -9,34 +9,35 @@
 
 namespace string {
 
-inline std::string trim(const std::string &s);
-inline std::string trim_whitespace(const std::string &s);
-inline std::string trim_right(const std::string &s);
-inline std::string trim_left(const std::string &s);
-inline std::string to_lower(const std::string &s);
-inline std::string to_upper(const std::string &s);
-inline bool starts_with(const std::string &s1, const std::string &s2);
-inline bool ends_with(const std::string &s1, const std::string &s2);
-inline bool contains(const std::string &s1, const std::string &s2);
-inline std::vector<std::string> split(const std::string &s,
-                                      const std::string &delim);
+inline std::string trim(const std::string_view &s);
+inline std::string trim_whitespace(const std::string_view &s);
+inline std::string trim_right(const std::string_view &s);
+inline std::string trim_left(const std::string_view &s);
+inline std::string to_lower(const std::string_view &s);
+inline std::string to_upper(const std::string_view &s);
+inline bool starts_with(const std::string_view &s1, const std::string_view &s2);
+inline bool ends_with(const std::string_view &s1, const std::string_view &s2);
+inline bool contains(const std::string_view &s1, const std::string_view &s2);
+inline std::vector<std::string> split(const std::string_view &s,
+                                      const std::string_view &delim);
 
 template <typename Container>
-inline std::string join(const Container &contents, const std::string &delim);
+inline std::string join(const Container &contents,
+                        const std::string_view &delim);
 
-inline std::string trim(const std::string &s) {
+inline std::string trim(const std::string_view &s) {
     std::string res = trim_left(s);
 
     return trim_right(res);
 }
 
-inline std::string trim_whitespace(const std::string &s) {
+inline std::string trim_whitespace(const std::string_view &s) {
     std::string res = trim_left(s);
 
     return trim_right(res);
 }
 
-inline std::string trim_right(const std::string &s) {
+inline std::string trim_right(const std::string_view &s) {
     auto rev_it = s.rbegin();
     while (rev_it.base() != s.begin() && std::isspace(*rev_it)) {
         rev_it++;
@@ -45,7 +46,7 @@ inline std::string trim_right(const std::string &s) {
     return std::string(s.begin(), rev_it.base());
 }
 
-inline std::string trim_left(const std::string &s) {
+inline std::string trim_left(const std::string_view &s) {
     auto it = s.begin();
     while (it != s.end() && std::isspace(*it)) {
         it++;
@@ -54,7 +55,7 @@ inline std::string trim_left(const std::string &s) {
     return std::string(it, s.end());
 }
 
-inline std::string to_lower(const std::string &s) {
+inline std::string to_lower(const std::string_view &s) {
     std::string res;
 
     for (auto &c : s) {
@@ -68,7 +69,7 @@ inline std::string to_lower(const std::string &s) {
     return res;
 }
 
-inline std::string to_upper(const std::string &s) {
+inline std::string to_upper(const std::string_view &s) {
     std::string res;
 
     for (auto &c : s) {
@@ -82,8 +83,8 @@ inline std::string to_upper(const std::string &s) {
     return res;
 }
 
-inline std::vector<std::string> split(const std::string &s,
-                                      const std::string &delim) {
+inline std::vector<std::string> split(const std::string_view &s,
+                                      const std::string_view &delim) {
     std::vector<std::string> res;
 
     if (s.size() == 0) {
@@ -91,7 +92,7 @@ inline std::vector<std::string> split(const std::string &s,
     }
 
     if (delim.size() == 0) {
-        res.push_back(s);
+        res.push_back(std::string(s));
 
         return res;
     }
@@ -119,7 +120,8 @@ inline std::vector<std::string> split(const std::string &s,
 }
 
 template <typename Container>
-inline std::string join(const Container &contents, const std::string &delim) {
+inline std::string join(const Container &contents,
+                        const std::string_view &delim) {
     if (contents.size() == 0) {
         return "";
     }
@@ -136,14 +138,15 @@ inline std::string join(const Container &contents, const std::string &delim) {
     return res;
 }
 
-inline bool starts_with(const std::string &s1, const std::string &s2) {
+inline bool starts_with(const std::string_view &s1,
+                        const std::string_view &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }
 
     auto n = s1.find(s2);
 
-    if (n == std::string::npos) {
+    if (n == std::string_view::npos) {
         return false;
     }
 
@@ -154,14 +157,14 @@ inline bool starts_with(const std::string &s1, const std::string &s2) {
     return false;
 }
 
-inline bool ends_with(const std::string &s1, const std::string &s2) {
+inline bool ends_with(const std::string_view &s1, const std::string_view &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }
 
     auto n = s1.rfind(s2);
 
-    if (n == std::string::npos) {
+    if (n == std::string_view::npos) {
         return false;
     }
 
@@ -172,14 +175,14 @@ inline bool ends_with(const std::string &s1, const std::string &s2) {
     return false;
 }
 
-inline bool contains(const std::string &s1, const std::string &s2) {
+inline bool contains(const std::string_view &s1, const std::string_view &s2) {
     if (s1.size() == 0 || s2.size() == 0) {
         return false;
     }
 
     auto n = s1.rfind(s2);
 
-    if (n == std::string::npos) {
+    if (n == std::string_view::npos) {
         return false;
     }
 

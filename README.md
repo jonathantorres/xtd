@@ -1,5 +1,5 @@
 # xtd
-[![Tests](https://github.com/jonathantorres/xtd/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/jonathantorres/xtd/actions/workflows/tests.yml)
+[![Build and Tests](https://github.com/jonathantorres/xtd/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/jonathantorres/xtd/actions/workflows/tests.yml)
 
 Various utilities and functions that are not available in the standard library
 

@@ -7,7 +7,7 @@
 #include <string_view>
 #include <vector>
 
-namespace string {
+namespace xtd {
 
 inline std::string trim(const std::string_view &s);
 inline std::string trim_whitespace(const std::string_view &s);
@@ -189,5 +189,5 @@ inline bool contains(const std::string_view &s1, const std::string_view &s2) {
     return true;
 }
 
-} // namespace string
+} // namespace xtd
 #endif

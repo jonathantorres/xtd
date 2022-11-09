@@ -4,7 +4,7 @@
 #include <vector>
 
 int main(int argc, const char **argv) {
-    cmd::command c{argc, argv};
+    xtd::command c{argc, argv};
     bool f_val;
     bool foo_val;
     std::string d_val;

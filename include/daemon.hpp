@@ -17,7 +17,7 @@
 #include <syslog.h>
 #include <unistd.h>
 
-namespace net {
+namespace xtd {
 
 inline void daemonize(const std::string cmd);
 inline bool daemon_is_running(const std::string cmd,
@@ -148,5 +148,5 @@ inline bool daemon_is_running(const std::string cmd,
 
     return false;
 }
-} // namespace net
+} // namespace xtd
 #endif

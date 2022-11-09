@@ -9,9 +9,9 @@ int main(void) {
     std::string program("net");
     std::string path("/home/jonathan/daemon_test.pid");
 
-    net::daemonize(program);
+    xtd::daemonize(program);
 
-    if (net::daemon_is_running(program, path)) {
+    if (xtd::daemon_is_running(program, path)) {
         syslog(LOG_ERR, "daemon already running");
         std::exit(EXIT_FAILURE);
     }

@@ -6,16 +6,16 @@
 #include <utility>
 #include <vector>
 
-namespace cmd {
+namespace xtd {
 
 class command {
   public:
     command(const int argc, const char *argv[]) : m_argc{argc}, m_argv{argv} {};
     ~command() = default;
-    command(const cmd::command &other) = delete;
-    command(cmd::command &&other) = delete;
-    cmd::command &operator=(const cmd::command &rhs) = delete;
-    cmd::command &operator=(cmd::command &&rhs) = delete;
+    command(const xtd::command &other) = delete;
+    command(xtd::command &&other) = delete;
+    xtd::command &operator=(const xtd::command &rhs) = delete;
+    xtd::command &operator=(xtd::command &&rhs) = delete;
 
     bool unknown_value_found() noexcept {
         if (m_unknowns.size() > 0) {
@@ -104,6 +104,6 @@ class command {
     int m_argc;
     const char **m_argv;
 };
-} // namespace cmd
+} // namespace xtd
 
 #endif

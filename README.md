@@ -24,6 +24,19 @@ A few simple string related functions, the functions implemented currently are:
 ### cmd
 Parser for command line options
 
+### daemon
+Daemonize a process. There are two functions, `daemonize` which will daemonize the process and `daemon_is_running` which will check for a lock file to make sure the process is not run more than once at the same time.
+
+```cpp
+// "cmd" is the name of your program
+void daemonize(std::string cmd);
+
+// "cmd" is the name of your program and "lockfile_path" is the location
+// of where you wish to store the lockfile with the process id
+// it returns true if the process is already running and false otherwise
+bool daemon_is_running(std::string cmd, std::string lockfile_path);
+```
+
 ## Running tests
 Use `cmake` to build and run the tests:
 ```bash

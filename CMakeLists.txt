@@ -35,5 +35,6 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     add_subdirectory(tests xtd_tests)
 
     add_executable(cmd_example src/cmd_example.cpp include/cmd.hpp)
+    add_executable(daemon_example src/daemon_example.cpp include/daemon.hpp)
 endif()
 

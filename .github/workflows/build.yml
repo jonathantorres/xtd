@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  gcc_build:
+    name: GCC ${{ matrix.ver }}
+    runs-on: ubuntu-latest
+    container: gcc:${{ matrix.ver }}
+    strategy:
+      matrix:
+        ver: [9, 10, 11, 12]
+    env:
+      CC: gcc
+      CXX: g++
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install CMake
+      run: apt-get update && apt-get -y install cmake
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+  clang_build:
+    name: Clang ${{ matrix.ver }}
+    runs-on: ubuntu-latest
+    container: silkeh/clang:${{ matrix.ver }}
+    strategy:
+      matrix:
+        ver: [11, 12, 13, 14]
+    env:
+      CC: clang
+      CXX: clang++
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install CMake
+      run: apt-get update && apt-get -y install cmake
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+  
+  macos_build:
+    name: MacOS
+    runs-on: macos-latest
+    env:
+      CC: clang
+      CXX: clang++
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
